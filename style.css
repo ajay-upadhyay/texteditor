@@ -202,3 +202,29 @@ textarea {
     }
 
 }
+
+@media only screen and (max-width:567px) {
+    .head {
+        height: 4vh;
+    }
+
+    .left button {
+        height: 4vh;
+        width: 12vw;
+        font-size: 1.1em;
+    }
+
+    .right>button:first-child {
+
+
+        height: 4vh;
+        width: 21vw;
+        font-size: 1.1em;
+    }
+
+    .right>button:last-child {
+        height: 4vh;
+        width: 21vw;
+        font-size: 1.1em;
+    }
+}
