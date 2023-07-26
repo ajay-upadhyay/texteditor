@@ -71,20 +71,57 @@ btn4.addEventListener('click', () => {
 
 
 //   when a user click on download button
-  // Get references to the elements
 
-let download = document.getElementsByTagName("button")[2];
-  // Save functionality
-  download.addEventListener('click', async () => {
-    const textToSave = textarea.value;
+// let download = document.getElementsByTagName("button")[2];
+//   // Save functionality
+//   download.addEventListener('click', async () => {
+//     const textToSave = textarea.value;
 
-    try {
-      const fileHandle = await window.showSaveFilePicker();
-      const writable = await fileHandle.createWritable();
-      await writable.write(textToSave);
-      await writable.close();
-      alert('File saved successfully!');
-    } catch (error) {
-      console.error('Error saving file:', error);
-    }
-  });
+//     try {
+//       const fileHandle = await window.showSaveFilePicker();
+//       const writable = await fileHandle.createWritable();
+//       await writable.write(textToSave);
+//       await writable.close();
+//       alert('File saved successfully!');
+//     } catch (error) {
+//       console.error('Error saving file:', error);
+//     }
+//   });
+
+  document.addEventListener('DOMContentLoaded', function() {
+    // Get references to the elements
+    const textEditor = document.getElementById('textarea');
+    const downloadButton = document.getElementById('button_download');
+
+    // Function to handle the button click event
+    downloadButton.addEventListener('click', function() {
+        // Get the text content from the editor
+        const textContent = textEditor.value;
+
+        // Create a new Blob with the text content
+        const blob = new Blob([textContent], { type: 'text/plain' });
+
+        // Create a URL for the Blob
+        const url = URL.createObjectURL(blob);
+
+        // Create an anchor element
+        const downloadLink = document.createElement('a');
+        downloadLink.href = url;
+
+        // Set the file name for the download
+        downloadLink.download = 'text_file.txt';
+
+        // Append the link to the document
+        document.body.appendChild(downloadLink);
+
+        // Simulate a click on the link to trigger the download
+        downloadLink.click();
+
+        // Remove the link from the document
+        document.body.removeChild(downloadLink);
+
+        // Revoke the URL to free up resources
+        URL.revokeObjectURL(url);
+    });
+});
+
